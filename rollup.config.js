@@ -10,12 +10,14 @@ module.exports = function(cli){
 
 	const name = pkg.productTag;
 	const mode = cli["config-mode"] || "fast";
+	const nowarn = cli["nowarn"] ? true : false;
 	const outname = cli["config-name"] || ( mode === "min" ? `${name}.min` : name );
 	const skin = cli["config-skin"] || "material";
-
+	
 	const plugins = [
 		replace({
 			DEBUG: mode !== "min",
+			NOWARN: nowarn,
 			VERSION: pkg.version
 		}),
 		less({
@@ -25,7 +27,7 @@ module.exports = function(cli){
 			}
 		}),
 		license({
-			sourceMap: true,
+			sourcemap: true,
 			banner: `@license
 webix <%= pkg.productName %> v.<%= pkg.version %>
 This software is allowed to use under GPL or you need to obtain Commercial License 

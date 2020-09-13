@@ -50,7 +50,7 @@ if (DEBUG){
 
 	ready(function(){
 		var path = document.location.href;
-		if (path.indexOf("file:")===0){
+		if (path.indexOf("file:")===0 && !NOWARN){
 			message({
 				type:"error", 
 				text:"Please open sample by http,<br>not as file://",
